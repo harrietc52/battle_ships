@@ -1,18 +1,15 @@
-class Ship
 
-  attr_reader :size, :position
+# require 'water'
+
+class Ship
+  include Hit
+
+  attr_reader :position
 
   def initialize(position)
-    @hit = false
     @position = position
+    @hit = false
   end
 
-  def hit?
-    @hit
-  end
-
-  def hit
-    @hit = true
-  end
 
 end
