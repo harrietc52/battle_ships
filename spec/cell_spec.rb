@@ -1,5 +1,5 @@
-require './lib/cell'
+# require './lib/cell'
 
-describe Cell do
+# describe Cell do
 
-end
+# end
