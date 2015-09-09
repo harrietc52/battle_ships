@@ -2,32 +2,45 @@ require "./lib/ship"
 
 describe Ship do
 
-  let(:ship){Ship.new(1)}
+  ship = Ship.new
 
   context "when initialized" do
     it "create a ship with size" do
-      expect(ship.size).to eq 1
+      expect(subject.size).to eq 1
     end
   end
 
   it "can be hit" do
-    ship.recieve_hit
-    allow(ship).to receive(:recieve_hit).and_return(true)
+    subject.struck
+    allow(subject).to receive(:struck).and_return(true)
   end
 
   it "can't be hit when missed" do
-    ship.recieve_hit
-    allow(ship).to receive(:recieve_hit).and_return(false)
+    subject.struck
+    allow(subject).to receive(:struck).and_return(false)
   end
 
-  it "can be missed" do
-    expect(ship.floating?).to eq true
+  it "hit but still floating" do
+    ship.struck
+    expect(subject.floating?).to eq true
   end
 
   it "is sunk" do
-    ship.recieve_hit
-    expect(ship.sunk).to eq true
+    subject.struck
+    expect(subject.sunk).to eq true
   end
+
+  it "has been struck" do
+    subject.struck
+    expect(subject.struck).to eq true
+  end
+
+  it "has been missed" do
+    subject.missed
+    expect(subject.missed).to eq false
+  end
+
+
 
   describe "can create different ships" do
 
@@ -53,9 +66,9 @@ describe Ship do
 
     it "can create aircraft carrier" do
       ac = Ship.aircraft_carrier
-      expect(ac.size).to eq 4
+      expect(ac.size).to eq 5
     end
 
   end
-  
+
 end

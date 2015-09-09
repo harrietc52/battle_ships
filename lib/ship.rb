@@ -1,25 +1,32 @@
 class Ship
 
   attr_reader :size
-  attr_accessor :hits
+  attr_writer :hits
 
-  def initialize(size)
+  def initialize(size=1)
     @size = size
     @hits = 0
 
+  end
+
+  def struck
+    @hits += 1
+    true
+  end
+
+  def missed
+    @hits += 1
+    false
   end
 
   def floating?
     @size != @hits
   end
 
-  def recieve_hit
-    @hits +=1
-  end
-
   def sunk
     @size == @hits
   end
+
 
   def self.patrol_boat
     new 2
@@ -38,7 +45,7 @@ class Ship
   end
 
   def self.aircraft_carrier
-    new 4
+    new 5
   end
 
 end
