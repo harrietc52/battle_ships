@@ -6,7 +6,6 @@ class Ship
   def initialize(size=1)
     @size = size
     @hits = 0
-
   end
 
   def struck
