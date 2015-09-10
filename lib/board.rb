@@ -1,9 +1,12 @@
 class Board
 
+  attr_reader :water
+
   attr_accessor :content, :shot
 
-  def initialize(content=water)
-    @content = content
+
+  def initialize
+    @content = water
     @shot = false
   end
 
@@ -18,11 +21,12 @@ class Board
   def shoot!
     self.shot = true
     content.struck
-    @content = 'ship'
+    @content != water
   end
 
   def shot?
     @shot
   end
+
 
 end
