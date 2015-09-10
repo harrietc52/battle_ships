@@ -5,14 +5,24 @@ describe Board do
 
   context "on initialation:" do
 
-  it "has content of water" do
-    expect(subject.content).to eq nil
+    it "has content of water" do
+      expect(subject.content).to eq nil
+    end
+
+    it "board has count of 100" do
+      expect(subject.grid.flatten.count).to eq 100
+    end
+
   end
 
-  it "board has count of 100" do
-    expect(subject.grid.flatten.count).to eq 100
+  it "place ship will change content from water to ship" do
+    subject.place_ship(ship,1,2,'South')
+    expect(subject.content).to eq ship
   end
 
+  it "place ship should have three arguments" do
+    expect(subject).to respond_to(:place_ship)
+    subject.place_ship(ship,1,2,'South')
   end
 
   it "not shot when initialized" do
@@ -24,10 +34,6 @@ describe Board do
     subject.shoot!
   end
 
-  it "can add ship when shot" do
-    subject.add_ship(ship)
-    expect(subject.content).to eq ship
-  end
 
   it "marked as shot after being shot at" do
     expect(subject.content).to receive(:struck)
