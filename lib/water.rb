@@ -1,7 +1,7 @@
-class Water
-
-  def struck
-    "Boom!"
-  end
-
-end
+# class Water
+#
+#   def struck
+#     "Boom!"
+#   end
+#
+# end

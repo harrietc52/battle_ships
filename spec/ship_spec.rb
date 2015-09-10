@@ -4,11 +4,11 @@ describe Ship do
 
   ship = Ship.new
 
-  context "when initialized" do
-    it "create a ship with size" do
-      expect(subject.size).to eq 1
-    end
-  end
+  # context "when initialized" do
+  #   it "create a ship with size" do
+  #     expect(subject.size).to eq 1
+  #   end
+  # end
 
   it "can be hit" do
     subject.struck
