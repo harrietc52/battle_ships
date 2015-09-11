@@ -26,4 +26,14 @@ describe Board do
     expect { subject.place_ship(ship3) }.to raise_error "Ship cannot be placed overlappig with another ship."
   end
 
+  it "responds to being fired at" do
+    expect(subject).to respond_to(:fire).with(1).argument
+    subject.fire([5,5])
+  end
+
+  it "removes ship from ship array when hit" do
+    subject.fire([5,5])
+    expect(subject.ships).not_to include([5,5])
+  end
+
 end

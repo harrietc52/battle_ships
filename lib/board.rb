@@ -15,6 +15,16 @@ class Board
     @ships << ship
   end
 
+  def fire(coordinates)
+    @ships.each do |ship|
+      if ship.fire(coordinates)
+        @ships.delete(ship)
+      return "Boom!"
+      end
+    end
+    "Miss"
+  end
+
   private
 
   def in_bounds?(ship)
