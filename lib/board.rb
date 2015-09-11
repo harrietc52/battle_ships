@@ -1,3 +1,5 @@
+require_relative 'ship.rb'
+
 class Board
 
   def initialize(length)
@@ -6,7 +8,7 @@ class Board
 
 
   def place_ship(ship, origin, direction)
-
+    fail "Ship cannot be placed out of boundary." unless in_bounds?(ship)
   end
 
   # def shoot!
@@ -17,8 +19,13 @@ class Board
 
   private
 
-  def in_bounds?
-
+  def in_bounds?(ship)
+    ship.position.flatten.each do |i|
+      if i > (@length - 1)
+        return false
+      end
+      true
+    end
   end
 
   def overlapped?
