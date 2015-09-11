@@ -2,20 +2,18 @@ require_relative 'ship.rb'
 
 class Board
 
+  attr_reader :ships
+
   def initialize(length)
     @length = length
+    @ships = []
   end
 
-
-  def place_ship(ship, origin, direction)
+  def place_ship(ship)
     fail "Ship cannot be placed out of boundary." unless in_bounds?(ship)
+    fail "Ship cannot be placed overlappig with another ship." if overlapped?(ship)
+    @ships << ship
   end
-
-  # def shoot!
-  #   self.shot = true
-  #   content.struck
-  #   @content != water
-  # end
 
   private
 
@@ -28,7 +26,12 @@ class Board
     end
   end
 
-  def overlapped?
+  def overlapped?(ship1)
+    @ships.each do |ship|
+      if (ship.position & ship1.position).any?
+        return true
+      end
+    end
+      false
   end
-
 end
