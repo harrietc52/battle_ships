@@ -21,34 +21,34 @@ describe Ship do
 
   context "#hits" do
 
+    it "ship is initialized with no hits" do
+      expect(subject.damage).to eq(0)
+    end
+
     it "can be shot at" do
       expect(subject).to respond_to(:fire).with(1).argument
     end
 
     it "it reports being hit" do
-      expect(ship1.fire[0,1]).to be_truthy
+      expect(ship1.fire([0,1])).to eq true
     end
 
-    it "it reponts being missed" do
-      expect(ship1.fire[0,3]).to be_falsey
+    it "it reports being missed" do
+      expect(ship1.fire([0,3])).to eq false
     end
 
-  end
-
-  context "#damage" do
-
-    it "ship is initialized with no hits" do
-      expect(subject.damage).to eq(0)
+    it "position array no longer contains hit cells" do
+      expect(ship1.position).not_to include([0,1])
     end
 
-   it "will count hits when recieved" do
-      subject.hit
-      expect(subject.damage).to eq(1)
+    it "will count hits when recieved" do
+      ship1.fire([0,0])
+      expect(ship1.damage).to eq(2)
     end
 
     it "can sink ship" do
-      subject.hit
-      expect(subject.sunk?).to be true
+       ship1.fire([0,2])
+      expect(ship1.sunk?).to be true
     end
 
   end

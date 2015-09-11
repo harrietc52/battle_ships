@@ -11,12 +11,16 @@ class Ship
     calculate_position
   end
 
-  def hit
-    @damage += 1
-  end
-
   def sunk?
     @damage == @size
+  end
+
+  def fire(coordinates)
+    if @position.include?(coordinates)
+      hit
+      return true
+    end
+      false
   end
 
   private
@@ -35,6 +39,13 @@ class Ship
       end
     end
   end
+
+  def hit
+    @damage += 1
+  end
+
+end
+
 
 
   # def self.patrol_boat
@@ -56,5 +67,3 @@ class Ship
   # def self.aircraft_carrier
   #   new 5
   # end
-
-end
