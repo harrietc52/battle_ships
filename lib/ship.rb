@@ -1,50 +1,60 @@
 class Ship
 
-  attr_reader :size
-  attr_writer :hits
+  attr_reader :size, :damage, :position
 
-  def initialize(size=1)
+  def initialize(size, origin, direction)
     @size = size
-    @hits = 0
+    @origin = origin
+    @position = []
+    @damage = 0
+    @direction = direction
+    calculate_position
   end
 
-  def struck
-    @hits += 1
-    true
+  def hit
+    @damage += 1
   end
 
-  def missed
-    @hits += 1
-    false
+  def sunk?
+    @damage == @size
   end
 
-  def floating?
-    @size != @hits
+  private
+
+  def calculate_position
+    size.times do |i|
+      case @direction
+      when 'N'
+        @position << [@origin[0], (@origin[1] + i)]
+      when 'E'
+        @position << [(@origin[0] + i), @origin[1]]
+      when 'S'
+        @position << [@origin[0], (@origin[1] - i)]
+      when 'W'
+        @position << [(@origin[0] - i), @origin[1]]
+      end
+    end
   end
 
-  def sunk
-    @size == @hits
-  end
 
-
-  def self.patrol_boat
-    new 2
-  end
-
-  def self.destroyer
-    new 3
-  end
-
-  def self.submarine
-    new 3
-  end
-
-  def self.battleship
-    new 4
-  end
-
-  def self.aircraft_carrier
-    new 5
-  end
+  # def self.patrol_boat
+  #   new 2
+  # end
+  #
+  # def self.destroyer
+  #   new 3
+  # end
+  #
+  # def self.submarine
+  #   new 3
+  # end
+  #
+  # def self.battleship
+  #   new 4
+  # end
+  #
+  # def self.aircraft_carrier
+  #   new 5
+  # end
 
 end

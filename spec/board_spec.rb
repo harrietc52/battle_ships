@@ -25,7 +25,9 @@ describe Board do
     subject.place_ship(ship,1,2,'South')
   end
 
-  it "not shot when initialized" do
+  context "#hits" do
+
+  it "It is initialized with no hits" do
     expect(subject).not_to be_shot
   end
 
@@ -40,5 +42,5 @@ describe Board do
     subject.shoot!
     expect(subject).to be_shot
   end
-
+  end
 end
