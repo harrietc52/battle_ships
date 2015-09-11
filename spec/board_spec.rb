@@ -1,46 +1,17 @@
 require 'board'
 
 describe Board do
-  let(:ship) {double :ship}
-
-  context "on initialation:" do
-
-    it "has content of water" do
-      expect(subject.content).to eq nil
-    end
-
-    it "board has count of 100" do
-      expect(subject.grid.flatten.count).to eq 100
-    end
-
-  end
-
-  it "place ship will change content from water to ship" do
-    subject.place_ship(ship,1,2,'South')
-    expect(subject.content).to eq ship
-  end
+  subject { Board.new(10)}
+  let(:ship) {double :ship }
 
   it "place ship should have three arguments" do
     expect(subject).to respond_to(:place_ship)
-    subject.place_ship(ship,1,2,'South')
+    subject.place_ship(ship,[1,2],'S')
   end
 
-  context "#hits" do
-
-  it "It is initialized with no hits" do
-    expect(subject).not_to be_shot
+  it "does not allow ships to be placed out of bounds" do
+    expect { subject.place_ship(ship,[10,2], 'S') }.to raise_error
+    "Ship cannot be placed out of boundary."
   end
 
-  it "cell can be shot at" do
-    expect(subject.content).to receive(:struck)
-    subject.shoot!
-  end
-
-
-  it "marked as shot after being shot at" do
-    expect(subject.content).to receive(:struck)
-    subject.shoot!
-    expect(subject).to be_shot
-  end
-  end
 end

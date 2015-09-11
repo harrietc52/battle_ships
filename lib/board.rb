@@ -1,35 +1,27 @@
 class Board
 
-  attr_reader :water
-
-  attr_accessor :content, :shot
-
-  def initialize
-    @grid = grid
-    @content = water
-    @shot = false
+  def initialize(length)
+    @length = length
   end
 
-  def grid
-    @grid = Array.new(10){Array.new(10)}
-    # @grid = Array({:a => "a", :b => "b"})
-  end
 
-  def place_ship(ship,x,y, direction)
-    @grid[x][y] = 'x'
-    self.content = ship
+  def place_ship(ship, origin, direction)
 
   end
 
-  def shoot!
-    self.shot = true
-    content.struck
-    @content != water
+  # def shoot!
+  #   self.shot = true
+  #   content.struck
+  #   @content != water
+  # end
+
+  private
+
+  def in_bounds?
+
   end
 
-  def shot?
-    @shot
+  def overlapped?
   end
-
 
 end

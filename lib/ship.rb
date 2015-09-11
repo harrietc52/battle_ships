@@ -12,12 +12,13 @@ class Ship
   end
 
   def sunk?
-    @damage == @size
+    @position.empty?
   end
 
   def fire(coordinates)
     if @position.include?(coordinates)
-      hit
+      @damage += 1
+      @position.delete(coordinates)
       return true
     end
       false
@@ -38,10 +39,6 @@ class Ship
         @position << [(@origin[0] - i), @origin[1]]
       end
     end
-  end
-
-  def hit
-    @damage += 1
   end
 
 end
